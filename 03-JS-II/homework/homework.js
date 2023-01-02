@@ -5,12 +5,14 @@ function obtenerMayor(x, y) {
   // Devuelve el número más grande
   // Si son iguales, devuelve cualquiera de los dos
   // Tu código:
+  return x > y ? x : y;
 }
 
 function mayoriaDeEdad(edad) {
   //Determinar si la persona según su edad puede ingresar a un evento.
   //Si tiene 18 años ó más, devolver --> "Allowed"
   //Si es menor, devolver --> "Not allowed"
+  return edad >= 18 ? "Allowed" : "Not allowed";
 }
   
 function conection(status) {
@@ -19,6 +21,7 @@ function conection(status) {
   //Cuando el estado es igual a 2, el usuario está "Away"
   //De lo contrario, presumimos que el usuario está "Offline"
   //Devolver el estado de conexión de usuario en cada uno de los casos.
+  return status === 1 ? "Online" : status === 2 ? "Away" : "Offline";
 }
 
 function saludo(idioma) {
@@ -28,6 +31,7 @@ function saludo(idioma) {
   // Si "idioma" es "ingles", devuelve "Hello!"
   // Si "idioma" no es ninguno de los anteiores o es `undefined` devuelve "Hola!"
   // Tu código:
+  return idioma === "aleman" ? "Guten Tag!" : idioma === "mandarin" ? "Ni Hao!" : idioma === "ingles" ? "Hello!" : "Hola!";
 }
 
 function colors(color) {
@@ -38,18 +42,38 @@ function colors(color) {
   //En caso que el color recibido sea "orange", devuleve --> "This is orange"
   //Caso default: devuelve --> "Color not found"
   //Usar el statement Switch.
+  var resultado = "Color not found";
+
+  switch (color) {
+    case "blue":
+      resultado = "This is blue";
+      break;
+    case "red":
+      resultado = "This is red";
+      break;
+    case "green":
+      resultado = "This is green";
+      break;
+    case "orange":
+      resultado = "This is orange";
+      break;
+  }
+
+  return resultado;
 }
 
 function esDiezOCinco(numero) {
   // Devuelve "true" si "numero" es 10 o 5
   // De lo contrario, devuelve "false"
   // Tu código:
+  return numero === 10 || numero === 5;
 }
 
 function estaEnRango(numero) {
   // Devuelve "true" si "numero" es menor que 50 y mayor que 20
   // De lo contrario, devuelve "false"
   // Tu código:
+  return numero < 50 && numero > 20;
 }
 
 function esEntero(numero) {
@@ -60,6 +84,7 @@ function esEntero(numero) {
   // De lo contrario, devuelve "false"
   // Pista: Puedes resolver esto usando `Math.floor`
   // Tu código:
+  return numero === Math.floor(numero);
 }
 
 function fizzBuzz(numero) {
@@ -67,15 +92,35 @@ function fizzBuzz(numero) {
   // Si "numero" es divisible entre 5, devuelve "buzz"
   // Si "numero" es divisible entre 3 y 5 (ambos), devuelve "fizzbuzz"
   // De lo contrario, devuelve el numero
+  var string = "";
+  var fizz = numero % 3 === 0;
+  var buzz = numero % 5 === 0;
+  if(!fizz && !buzz){
+    return numero;
+  } else {
+    return string.concat(fizz ? "fizz" : "", buzz ? "buzz" : "");
+  }
 }
 
 function operadoresLogicos(num1, num2, num3) {
   //La función recibe tres números distintos. 
-  //Si num1 es mayor a num2 y a num3 y además es positivo, retornar ---> "Número 1 es mayor y positivo"
-  //Si alguno de los tres números es negativo, retornar ---> "Hay negativos"
-  //Si num3 es más grande que num1 y num2, aumentar su valor en 1 y retornar el nuevo valor.
-  //0 no es ni positivo ni negativo. Si alguno de los argumentos es 0, retornar "Error".
-  //Si no se cumplen ninguna de las condiciones anteriores, retornar false. 
+  //Si num1 es mayor a num2 y a num3 y además es positivo, retornar ---> "Número 1 es mayor y positivo"                                 num1 > num2 && num3        => num1 > 0
+  //Si alguno de los tres números es negativo, retornar ---> "Hay negativos"                                                            num1 || num2 || num3 < 0   => "Hay negativos"
+  //Si num3 es más grande que num1 y num2, aumentar su valor en 1 y retornar el nuevo valor.                                            num3 > num1 && num2        => num3 + 1
+  //0 no es ni positivo ni negativo. Si alguno de los argumentos es 0, retornar "Error".                                                num1 || num2 || num3 === 0 => error
+  //Si no se cumplen ninguna de las condiciones anteriores, retornar false.                                                             else => false
+  var resultado = "";
+  var booleano = false;
+  if(num1 > 0 && num2 > 0 && num3 > 0 && num2 > num1 && num2 > num3){
+    booleano = true;
+  } else {
+    resultado = num1 > num2 && num1 > num3 && num1 > 0 ? "Número 1 es mayor y positivo" : resultado;
+    resultado = num1 < 0 || num2 < 0 || num3 < 0       ? "Hay negativos"                : resultado;
+    resultado = num3 > num1 && num3 > num2             ? num3 + 1                       : resultado;
+    num3 = resultado === num3 + 1 ? num3 + 1 : num3;
+    resultado = num1 === 0 || num2 === 0 || num3 === 0 ? "Error"                        : resultado;
+  }
+  return booleano ? false : resultado;
 }
 
 function esPrimo(numero) {
@@ -84,32 +129,51 @@ function esPrimo(numero) {
   // Pista: un número primo solo es divisible por sí mismo y por 1
   // Pista 2: Puedes resolverlo usando un bucle `for`
   // Nota: Los números 0 y 1 NO son considerados números primos
+  var esPrimoInicial = numero == 2 || numero == 3 || numero == 5 || numero == 7;
+  var esDivisible = false;
+
+  if(!esPrimoInicial){
+    esDivisible = numero % 2 === 0 || numero % 3 === 0 || numero % 5 === 0 || numero % 7 === 0;
+  }
+
+  return (esPrimoInicial || !esDivisible) && (numero > 1);
 }
 
 function esVerdadero(valor){
   //Escribe una función que reciba un valor booleano y retorne “Soy verdadero” 
   //si su valor es true y “Soy falso” si su valor es false.
   //Escribe tu código aquí
-
+  return valor ? "Soy verdadero" : "Soy falso";
 }
 
 function tablaDelSeis(){
   //Escribe una función que muestre la tabla de multiplicar del 6 (del 0 al 60).
   //La función devuelve un array con los resultados de la tabla de multiplicar del 6 en orden creciente.
   //Escribe tu código aquí   
-  
+  var tabla = [];
+  for(var i = 0; i <= 10; i++){
+    tabla.push(i * 6);
+  }
+  console.log(tabla);
+  return tabla;
 }
 
 function tieneTresDigitos(numero){
   //Leer un número entero y retornar true si tiene 3 dígitos. Caso contrario, retorna false.
   //Escribe tu código aquí
-  
+  return numero > 99 && numero < 1000;
 }
 
 function doWhile(numero) {
   //Implementar una función tal que vaya aumentando el valor recibido en 5 hasta un límite de 8 veces
   //Retornar el valor final.
   //Usar el bucle do ... while.
+  var iterador = 0;
+  do{
+    iterador += 1;
+    numero += 5;
+  } while(iterador < 8);
+  return numero;
 }
 
 
